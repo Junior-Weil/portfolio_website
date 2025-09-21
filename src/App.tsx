@@ -1,50 +1,31 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { generateClient } from "aws-amplify/data";
-
-const client = generateClient<Schema>();
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import HarmonyNav from './components/NavBar';
+import ProjectGallery from './pages/ProjectGallery';
+import './App.css';
+import Resume from './pages/Resume';
+import Kaggle from './pages/KaggleResults';
+import NotFound from './pages/404';
+import Todo from './pages/Todo';
 
 function App() {
-  const { user, signOut } = useAuthenticator();
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
 
   return (
-    <main>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li
-            onClick={() => deleteTodo(todo.id)}
-            key={todo.id}>{
-              todo.content}
-          </li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
+    <Router >
+      <HarmonyNav />
+      <div className="mt-16">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<ProjectGallery />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/kaggle" element={<Kaggle />} />
+          <Route path="/todo" element={<Todo />} />
+
+
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
       </div>
-      <button onClick={signOut}>Sign out</button>
-    </main>
+    </Router>
   );
 }
 
