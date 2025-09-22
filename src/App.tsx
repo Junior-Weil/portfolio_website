@@ -21,11 +21,11 @@ function App() {
           <Route path="/kaggle" element={<Kaggle />} />
           <Route path="/todo" element={<Todo />} />
 
-
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
+
   );
 }
 
