@@ -11,7 +11,9 @@ const schema = a.schema({
     .model({
       content: a.string(),
       isDone: a.boolean(),
+      userName: a.string(),
     })
+    .secondaryIndexes((index) => [index("userName")])
     .authorization((allow) => [allow.publicApiKey()]),
 });
 
