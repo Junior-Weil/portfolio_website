@@ -46,12 +46,15 @@ function Todo() {
   }
 
   return (
-    <div className="w-screen">
+    <div className="w-screen items-center">
       <div className="bg-white min-h-screen w-1/2 justify-center p-6 text-black">
         {hasUser == false ? (
           <div className="flex flex-col">
             <div>
-              <InputBox value={user} onChange={setUser} />
+              <h1>
+                Enter Username:
+              </h1>
+              <InputBox modifier="mt-6" value={user} onChange={setUser} />
             </div>
             <div className="mt-6">
               <button className="px-4 py-2 rounded text-white" onClick={() => setHasUser(true)}>Set User</button>
@@ -61,7 +64,7 @@ function Todo() {
           <>
             <div className="space-y-4 w-auto items-center">
               <h1 className="text-black">{user}'s todos</h1>
-              <InputBox value={contentValue} onChange={setContentValue} />
+              <InputBox modifier="" value={contentValue} onChange={setContentValue} />
               <FormGroup >
                 <FormControlLabel required control={<Switch checked={isDone} onChange={(_, checked) => setIsDone(checked)} />} label="Completed?" />
               </FormGroup>
