@@ -18,16 +18,31 @@ function Todo() {
   const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
 
   useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items])
-    });
-  }, []);
+    const u = user.trim().toLowerCase();
+    if (!hasUser || !u) {
+      setTodos([]); // reset if no user
+      return;
+    }
 
-  function createTodo(name: string, done: boolean) {
-    if (!contentValue.trim()) return;
+    // Subscribe only once a user is set
+    const sub = client.models.Todo.observeQuery({
+      filter: { userName: { eq: u } },
+    }).subscribe({
+      next: (data) => setTodos([...data.items]),
+      error: (err) => console.error("observeQuery error:", err),
+    });
+
+    // Clean up when user changes or component unmounts
+    return () => sub.unsubscribe();
+  }, [hasUser, user]);
+
+
+  function createTodo(name: string, done: boolean, uName: string) {
+    const u = uName.trim().toLowerCase()
+    if (!contentValue.trim() || !u) return;
     try {
       client.models.Todo.create(
-        { content: name, isDone: done },
+        { content: name, isDone: done, userName: u },
       );
     } catch (e) {
       console.error("Create failed: ", e);
@@ -54,7 +69,7 @@ function Todo() {
               <h1>
                 Enter Username:
               </h1>
-              <InputBox modifier="mt-6" value={user} onChange={setUser} />
+              <InputBox modifier="mt-6" value={user.trim()} onChange={setUser} />
             </div>
             <div className="mt-6">
               <button className="px-4 py-2 rounded text-white" onClick={() => setHasUser(true)}>Set User</button>
@@ -63,13 +78,13 @@ function Todo() {
         ) : (
           <>
             <div className="space-y-4 w-auto items-center">
-              <h1 className="text-black">{user}'s todos</h1>
+              <h1 className="text-black">{user.trim()}'s todos</h1>
               <InputBox modifier="" value={contentValue} onChange={setContentValue} />
               <FormGroup >
                 <FormControlLabel required control={<Switch checked={isDone} onChange={(_, checked) => setIsDone(checked)} />} label="Completed?" />
               </FormGroup>
 
-              <button onClick={() => createTodo(contentValue, isDone)} className="px-4 py-2 rounded bg-black text-white disabled:opacity-50" disabled={!contentValue.trim()}>
+              <button onClick={() => createTodo(contentValue, isDone, user)} className="px-4 py-2 rounded bg-black text-white disabled:opacity-50" disabled={!contentValue.trim()}>
                 Add Todo
               </button>
             </div>
