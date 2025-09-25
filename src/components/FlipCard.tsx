@@ -34,7 +34,7 @@ export default function FlipCard({
         <div className="absolute w-full h-full [backface-visibility:hidden] bg-white rounded-xl shadow-md p-4">
           {frontContent}
         </div>
-        <div className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-white rounded-xl shadow-md p-4 flex items-center justify-center text-center">
+        <div className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-white rounded-xl shadow-md p-4 flex items-center justify-center text-center text-white">
           {backContent}
         </div>
       </div>

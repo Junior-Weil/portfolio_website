@@ -128,7 +128,7 @@ def handler(event, context):
     predictions = make_predictions(X_train[:, index, None], W1, b1, W2, b2)
     label = Y_train[index]
 
-    current_image = current_image.reshape((28,28)) * 255
+    current_image = current_image.reshape((28,28)) * 255 # could also return this rather than making into an image with plt, if so see if you can remove import
     plt.gray()
     buf = io.BytesIO()
     plt.imsave(arr=current_image, fname=buf, format='png')

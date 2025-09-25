@@ -18,13 +18,20 @@ export default function TestimonialsGrid() {
       docLinkButtonText: "View Figures",
       docLinkText: "",
     },
+    {
+      image: "",
+      title: "Todo Application",
+      docLink: "/todo",
+      docLinkText: "",
+      docLinkButtonText: "Create Todos",
+    },
   ];
 
   return (
     <section className="py-14">
       <div className="max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="flex flex-grid items-center justify-center overflow-x-auto">
-          <GradientMarqueeText className="text-gray-800 text-3xl font-semibold sm:text-4xl" gradientColors={["#1F1C2C", "#928DAB", "#1F1C2C"]} text="Projects"/>
+          <GradientMarqueeText className="text-gray-800 text-3xl font-semibold sm:text-4xl" gradientColors={["#1F1C2C", "#928DAB", "#1F1C2C"]} text="Projects" />
         </div>
 
         <div className="mt-12">
@@ -48,9 +55,11 @@ export default function TestimonialsGrid() {
                       <a
                         href={item.docLink}
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                        className="bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition"
                       >
-                        {item.docLinkButtonText}
+                        <p className="text-white">
+                          {item.docLinkButtonText}
+                        </p>
                       </a>
                     </>
                   }
