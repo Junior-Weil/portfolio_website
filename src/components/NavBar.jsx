@@ -34,7 +34,7 @@ function HarmonyNav({ downloadVisible = false }) {
     // { text: "Todo", to: "/todo" },
   ]);
   const [profileNavItems, setProfileNavItems] = useState([
-    { text: "GitHub", to: "https://github.com/Junior-Weil" },
+    { text: "GitHub", to: "https://github.com/Ronald-Weil" },
     { text: "LinkedIn", to: "https://www.linkedin.com/in/ronald-weil-9561a6251" },
     { text: "Email", to: "mailto:rmw020@bucknell.edu" }
   ]);
