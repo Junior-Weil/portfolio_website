@@ -31,7 +31,6 @@ function HarmonyNav({ downloadVisible = false }) {
   const [navItems, setNavItems] = useState([
     { text: "AboutMe", to: "/" },
     { text: "Projects", to: "/projects" },
-    { text: "Resume", to: "/Resume" },
     // { text: "Todo", to: "/todo" },
   ]);
   const [profileNavItems, setProfileNavItems] = useState([
