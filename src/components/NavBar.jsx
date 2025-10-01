@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, redirect } from "react-router-dom";
+import ContactForm from "./ContactForm";
 
 function NavItem({ text, to }) {
   const isExternal = to.startsWith("http") || to.startsWith("mailto:");
@@ -36,7 +37,7 @@ function HarmonyNav({ downloadVisible = false }) {
   const [profileNavItems, setProfileNavItems] = useState([
     { text: "GitHub", to: "https://github.com/Ronald-Weil" },
     { text: "LinkedIn", to: "https://www.linkedin.com/in/ronald-weil-9561a6251" },
-    { text: "Email", to: "mailto:rmw020@bucknell.edu" }
+    { text: "Email", to: "/contact" }
   ]);
 
   useEffect(() => {

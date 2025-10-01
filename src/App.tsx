@@ -6,6 +6,7 @@ import './App.css';
 import Kaggle from './pages/KaggleResults';
 import NotFound from './pages/404';
 import Todo from './pages/Todo';
+import ContactMe from './pages/ContactMe'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/projects" element={<ProjectGallery />} />
           <Route path="/kaggle" element={<Kaggle />} />
           <Route path="/todo" element={<Todo />} />
+          <Route path='/contact' element={<ContactMe />} />
 
           <Route path="/*" element={<NotFound />} />
         </Routes>
