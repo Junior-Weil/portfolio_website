@@ -19,7 +19,7 @@ export default function TestimonialsGrid() {
       docLinkText: "",
     },
     {
-      image: "",
+      image: "/Todo.png",
       title: "Todo Application",
       docLink: "/todo",
       docLinkText: "",
